@@ -12,6 +12,7 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
+  { name: "Blog", href: "https://maddyscave.vercel.app/", external: true },
   { name: "Contact", href: "#contact" },
 ];
 

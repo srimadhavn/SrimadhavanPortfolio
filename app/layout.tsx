@@ -2,9 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/toaster';
-import { Analytics } from "@vercel/analytics/react"
 import Head from 'next/head';
+import ClientOnly from '@/components/ClientOnly';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
     url: 'https://srimadhavan.vercel.app/',
     title: 'Srimadhavan Portfolio | Professional Developer',
     description: 'A showcase of my work, skills, and professional experience as a developer',
-    siteName: 'Maddy Portfolio',
+    siteName: 'Srimadhavan Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
@@ -38,7 +37,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+              </Head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -46,9 +45,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster />
-          <Analytics />
+          <ClientOnly>
+            {children}
+          </ClientOnly>
         </ThemeProvider>
       </body>
     </html>

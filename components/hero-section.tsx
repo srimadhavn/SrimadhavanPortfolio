@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Instagram, Linkedin, Twitter } from "lucide-react";
+import { ArrowDown, Github, Instagram, Linkedin, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function HeroSection() {
@@ -75,13 +75,22 @@ export default function HeroSection() {
               <span className="sr-only">LinkedIn</span>
             </a>
             <a
-              href="https://twitter.com/yourusername"
+              href="https://leetcode.com/u/srimadhavn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Code2 className="h-6 w-6" />
+              <span className="sr-only">LeetCode</span>
+            </a>
+            <a
+              href="https://www.instagram.com/srimadhavn"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               <Instagram className="h-6 w-6" />
-              <span className="sr-only">Twitter</span>
+              <span className="sr-only">Instagram</span>
             </a>
           </div>
         </motion.div>
@@ -95,7 +104,7 @@ export default function HeroSection() {
           <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-primary/20">
             <Image
               src="https://i.pinimg.com/736x/71/42/d2/7142d2a4199e9d21647e4960488d8fb8.jpg"
-              alt="Maddy"
+              alt="Srimadhavan"
               fill
               sizes="(max-width: 768px) 16rem, (max-width: 1024px) 20rem, 24rem"
               className="object-cover"

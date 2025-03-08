@@ -72,7 +72,7 @@ export default function AboutSection() {
                I specialize in creating responsive, user-friendly applications that solve real-world problems. I prefer integrating the latest technologies to build scalable, secure, and efficient applications.
               </p>
               <p className="mb-6">
-                I hold a Bachelor's degree in Computer Science from University Name and have worked with various startups and established companies to deliver high-quality digital products. When I'm not coding, you can find me hiking, reading sci-fi novels, or experimenting with new recipes.
+                I hold a Bachelor's degree in Computer Science from SRM University. When I'm not coding, you can find me hiking, reading self-help books, or playing video games.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
@@ -90,7 +90,7 @@ export default function AboutSection() {
                     <Lightbulb className="h-8 w-8 text-primary mb-2" />
                     <h4 className="font-semibold">Problem Solver</h4>
                     <p className="text-sm text-muted-foreground">
-                      I enjoy tackling complex problems with creative solutions.
+                      I enjoy tackling complex problems with creative solutions with less time complexity.
                     </p>
                   </CardContent>
                 </Card>
@@ -99,7 +99,7 @@ export default function AboutSection() {
                     <Users className="h-8 w-8 text-primary mb-2" />
                     <h4 className="font-semibold">Team Player</h4>
                     <p className="text-sm text-muted-foreground">
-                      I thrive in collaborative environments and value teamwork.
+                      I love working in teams as i can connect with different people with great minds!
                     </p>
                   </CardContent>
                 </Card>

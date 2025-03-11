@@ -116,7 +116,7 @@ export default function ContactSection() {
                       <h3 className="font-semibold mb-1">Email</h3>
                       <p className="text-muted-foreground mb-2">For general inquiries</p>
                       <a
-                        href="mailto:hello@yourname.com"
+                        href="mailto:srimadhavan@aol.com"
                         className="text-primary hover:underline"
                       >
                         srimadhavan@aol.com

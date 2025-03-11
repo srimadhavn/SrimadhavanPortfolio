@@ -29,7 +29,7 @@ export default function Footer() {
               </Button>
               <Button variant="ghost" size="icon" asChild>
                 <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://linkedin.com/in/srimadhavn"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -38,18 +38,10 @@ export default function Footer() {
                 </a>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <a
-                  href="https://twitter.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="h-5 w-5" />
-                </a>
               </Button>
               <Button variant="ghost" size="icon" asChild>
                 <a
-                  href="mailto:hello@yourname.com"
+                  href="mailto:srimadhavan93@gmail.com"
                   aria-label="Email"
                 >
                   <Mail className="h-5 w-5" />

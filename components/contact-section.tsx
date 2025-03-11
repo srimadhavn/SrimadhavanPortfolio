@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm as useFormspree, ValidationError } from "@formspree/react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -38,8 +39,11 @@ const formSchema = z.object({
 export default function ContactSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
+  
+  const [formspreeState, handleFormspreeSubmit] = useFormspree("xeoaqzpl");
+  
+  console.log("Formspree state:", formspreeState); // Debug log
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,19 +54,42 @@ export default function ContactSection() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log("Form submitted with values:", values); // Debug log
     
-    setTimeout(() => {
-      console.log(values);
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
+    try {
+      await handleFormspreeSubmit({
+        name: values.name,
+        email: values.email,
+        subject: values.subject,
+        message: values.message,
       });
-      form.reset();
-      setIsSubmitting(false);
-    }, 1500);
-  }
+      
+      console.log("Formspree response:", formspreeState); // Debug log
+      
+      if (formspreeState.succeeded) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
+        form.reset();
+      } else if (formspreeState.errors) {
+        console.error("Formspree errors:", formspreeState.errors);
+        toast({
+          title: "Error",
+          description: "There was an error sending your message. Please check your inputs and try again.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error("Unexpected error during form submission:", error);
+      toast({
+        title: "Error",
+        description: "There was an unexpected error sending your message. Please try again later.",
+        variant: "destructive"
+      });
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -82,6 +109,28 @@ export default function ContactSection() {
       transition: { duration: 0.5 },
     },
   };
+
+  // If the form is successfully submitted
+  if (formspreeState.succeeded) {
+    return (
+      <section id="contact" ref={ref} className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <Card className="max-w-xl mx-auto">
+            <CardContent className="p-8 text-center">
+              <div className="bg-primary/10 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                <Mail className="h-10 w-10 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold mb-4">Thank You!</h2>
+              <p className="text-lg mb-6">Your message has been sent successfully. I'll get back to you as soon as possible.</p>
+              <Button onClick={() => window.location.reload()} className="mx-auto">
+                Send Another Message
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -133,7 +182,7 @@ export default function ContactSection() {
                     <div>
                       <h3 className="font-semibold mb-1">Phone</h3>
                       <a
-                        href="tel:+11234567890"
+                        href="tel:+917845558595"
                         className="text-primary hover:underline"
                       >
                         +91 78455 58595
@@ -160,7 +209,10 @@ export default function ContactSection() {
               <Card>
                 <CardContent className="p-6">
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <form 
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="space-y-6"
+                    >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <FormField
                           control={form.control}
@@ -169,9 +221,10 @@ export default function ContactSection() {
                             <FormItem>
                               <FormLabel>Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="Your name" {...field} />
+                                <Input placeholder="Your name" {...field} id="name" />
                               </FormControl>
                               <FormMessage />
+                              <ValidationError prefix="Name" field="name" errors={formspreeState.errors} />
                             </FormItem>
                           )}
                         />
@@ -182,9 +235,10 @@ export default function ContactSection() {
                             <FormItem>
                               <FormLabel>Email</FormLabel>
                               <FormControl>
-                                <Input placeholder="Your email" {...field} />
+                                <Input placeholder="Your email" {...field} id="email" />
                               </FormControl>
                               <FormMessage />
+                              <ValidationError prefix="Email" field="email" errors={formspreeState.errors} />
                             </FormItem>
                           )}
                         />
@@ -196,9 +250,10 @@ export default function ContactSection() {
                           <FormItem>
                             <FormLabel>Subject</FormLabel>
                             <FormControl>
-                              <Input placeholder="Subject of your message" {...field} />
+                              <Input placeholder="Subject of your message" {...field} id="subject" />
                             </FormControl>
                             <FormMessage />
+                            <ValidationError prefix="Subject" field="subject" errors={formspreeState.errors} />
                           </FormItem>
                         )}
                       />
@@ -213,14 +268,21 @@ export default function ContactSection() {
                                 placeholder="Your message"
                                 className="min-h-32"
                                 {...field}
+                                id="message"
                               />
                             </FormControl>
                             <FormMessage />
+                            <ValidationError prefix="Message" field="message" errors={formspreeState.errors} />
                           </FormItem>
                         )}
                       />
-                      <Button type="submit" className="w-full" disabled={isSubmitting}>
-                        {isSubmitting ? "Sending..." : "Send Message"}
+                      <Button 
+                        type="submit" 
+                        className="w-full" 
+                        disabled={formspreeState.submitting}
+                        aria-label="Send message"
+                      >
+                        {formspreeState.submitting ? "Sending..." : "Send Message"}
                       </Button>
                     </form>
                   </Form>

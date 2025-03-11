@@ -72,7 +72,7 @@ export default function AboutSection() {
                I specialize in creating responsive, user-friendly applications that solve real-world problems. I prefer integrating the latest technologies to build scalable, secure, and efficient applications.
               </p>
               <p className="mb-6">
-                I'm pursuing a Bachelor's degree in Computer Science from SRM University. When I'm not coding, you can find me hiking, reading self-help books, or playing video games.
+                I'm pursuing a Bachelor's degree in Computer Science from SRM University. When I'm not coding, you can find me sleeping, reading self-help books, or playing video games.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">

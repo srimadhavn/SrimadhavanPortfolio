@@ -77,11 +77,12 @@ export default function Footer() {
                 <Link href="#contact" className="text-muted-foreground hover:text-primary transition-colors">
                   Contact
                 </Link>
-                <li>
+                
+              </li>
+              <li>
                 <Link href="https://Srimadhavanscave.vercel.app/" className="text-muted-foreground hover:text-primary transition-colors">
                   Blog
                 </Link>
-              </li>
               </li>
             </ul>
           </div>

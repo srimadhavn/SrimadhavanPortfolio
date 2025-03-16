@@ -111,14 +111,7 @@ export default function Footer() {
           <p className="text-muted-foreground text-sm mb-4 md:mb-0">
             © {currentYear} Srimadhavan. All rights reserved.
           </p>
-          <div className="flex gap-4">
-            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
-            </Link>
-          </div>
+          
         </div>
       </div>
     </footer>
